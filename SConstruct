@@ -18,10 +18,9 @@ if not (projectmode in ['debug','release']):
 print('**** Compiling in ' + projectmode + ' mode...')
 
 #--------
-# Main application folder dir and output folder
+# application folder dir and output folder
 #--------
-
-buildroot = './bin/' + projectmode + '/'			#holds the root of the build directory tree
+buildroot = './bin/' + projectmode + '/'	#holds the root of the build directory tree
 targetpath = buildroot + '/' + projectname	#holds the path to the executable in the build directory
 #-------
 
@@ -53,12 +52,6 @@ if system=='Windows':
 
 	#env.Append(CPPDEFINES = ['SFML_STATIC']) 
 	#env.Append(CPPFLAGS=['-DOPENGL_ENABLED'])
-	#env.Append(CPPFLAGS=['-DGLES2_ENABLED'])
-	#env.Append(CCFLAGS='-MD -MF -DDEFINE1')
-	#env.Append(CCFLAGS=['-MD -MF'])
-	#env.Append(CCFLAGS = '-rdynamic')
-	#env.Append(LINKFLAGS=['/NODEFAULTLIB:library'])
-	
 	
 	env.Append(CPPPATH=include_packages) #include files
 	#build lib file
@@ -78,6 +71,7 @@ if system=='Windows':
 		lib_files.append(SFML_LIBS + "\\sfml-system.lib")
 		lib_files.append(SFML_LIBS + "\\sfml-window.lib")
 		env.Library(buildroot + 'sfml' , lib_files)
+		#pass
 	if projectmode == 'debug':
 		lib_files.append(SFML_LIBS + "\\sfml-graphics-s-d.lib")
 		lib_files.append(SFML_LIBS + "\\sfml-audio-s-d.lib")
@@ -89,11 +83,10 @@ if system=='Windows':
 
 	#copy file or folder to bin dir
 	#http://scons.org/doc/1.2.0/HTML/scons-user/c2848.html
+	#SFML library.dll
 	for basename in dll_packages:
-		env.Install(buildroot,SFML_BIN + basename + ".dll") #copy dll to output
+		env.Install(buildroot, SFML_BIN + basename + ".dll") #copy dll to output
 	#env.Install(buildroot,Glob("SFML-2.4.2\\bin\\*.dll") #copy dll to output
-	#print("buildroot:",buildroot)
-	#application
-	#env.Program(targetpath, Glob(builddir + '\\*.cpp'), LIBS=lib_packages, LIBPATH=['.','SFML-2.4.2\\lib', buildroot])
+	#exeute application 
 	env.Program(targetpath, Glob(builddir + '\\*.cpp'), LIBS=lib_packages, LIBPATH=['.',SFML_LIBS, buildroot])
 print("**** Scons Script End!")
