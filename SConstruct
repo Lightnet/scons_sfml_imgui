@@ -44,7 +44,13 @@ if system=='Windows':
 	print("**** Window Tool")
 	# Something to do with link error
 	#https://msdn.microsoft.com/en-us/library/y0zzbyt4.aspx
-	env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE'])
+	#env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE'])
+	if projectmode == 'debug':
+		#env.Append(CPPDEFINES = ['SFML_STATIC'])
+		#env.Append(CPPFLAGS=['_DEBUG'])
+		#env.Append(CPPFLAGS=['WINDOW'])
+		pass
+
 	#env.Append(CPPDEFINES = ['SFML_STATIC']) 
 	#env.Append(CPPFLAGS=['-DOPENGL_ENABLED'])
 	#env.Append(CPPFLAGS=['-DGLES2_ENABLED'])
@@ -63,8 +69,23 @@ if system=='Windows':
 	#env.Library(buildroot + 'sfml-graphics' , SFML_LIBS + '\\sfml-graphics.lib')
 	#env.Library(buildroot + 'sfml-system.' , SFML_LIBS + '\\sfml-system.lib')
 	#env.Library(buildroot + 'sfml-window' , SFML_LIBS + '\\sfml-window.lib')
-	env.Library(buildroot + 'sfml' , lib_files)
 	#env.Library(buildroot + 'sfml' , Glob(SFML_LIBS +"\\*.lib"))
+
+	if projectmode == 'release':
+		lib_files.append(SFML_LIBS + "\\sfml-graphics.lib")
+		lib_files.append(SFML_LIBS + "\\sfml-audio.lib")
+		lib_files.append(SFML_LIBS + "\\sfml-network.lib")
+		lib_files.append(SFML_LIBS + "\\sfml-system.lib")
+		lib_files.append(SFML_LIBS + "\\sfml-window.lib")
+		env.Library(buildroot + 'sfml' , lib_files)
+	if projectmode == 'debug':
+		lib_files.append(SFML_LIBS + "\\sfml-graphics-s-d.lib")
+		lib_files.append(SFML_LIBS + "\\sfml-audio-s-d.lib")
+		lib_files.append(SFML_LIBS + "\\sfml-network-s-d.lib")
+		lib_files.append(SFML_LIBS + "\\sfml-system-s-d.lib")
+		lib_files.append(SFML_LIBS + "\\sfml-window-s-d.lib")
+		env.Library(buildroot + 'sfml' , lib_files)
+		#pass
 
 	#copy file or folder to bin dir
 	#http://scons.org/doc/1.2.0/HTML/scons-user/c2848.html

@@ -5,20 +5,45 @@
     //"command": "bash",
     "tasks": [
         {
-            "taskName": "Build with SCons Debug Bat",
+            "taskName": "Lanuch Debug App.",
+            "problemMatcher": "$msCompile", // Important to catch the status
+            "command": "${workspaceRoot}/${config:output_dir}/debug/${config:output_program}.exe",
+        },
+
+        {
+            "taskName": "Lanuch Release App.",
+            "problemMatcher": "$msCompile", // Important to catch the status
+            "command": "${workspaceRoot}/${config:output_dir}/debug/${config:output_program}.exe",
+        },
+
+        {
+            "taskName": "Build with SCons Debug",
+            "problemMatcher": "$msCompile", // Important to catch the status
+            "group": "build",
+            "command": "${workspaceRoot}/vsbuild_debug.bat"
+        },
+        {
+            "taskName": "Build with SCons Release",
             "problemMatcher": "$msCompile", // Important to catch the status
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "${workspaceRoot}/vsbuild.bat"
+            "command": "${workspaceRoot}/vsbuild_release.bat"
         },
         {
-            "taskName": "Full Clean with SCons",
+            "taskName": "Clean with SCons Debug",
             "problemMatcher": "$msCompile", // Important to catch the status
             "group": "build",
             "type": "shell",
-            "command": "scons --clean "//,
+            "command": "scons mode=debug --clean "//,
+        },
+        {
+            "taskName": "Clean with SCons Release",
+            "problemMatcher": "$msCompile", // Important to catch the status
+            "group": "build",
+            "type": "shell",
+            "command": "scons mode=release --clean "//,
         }
     ]
 }
