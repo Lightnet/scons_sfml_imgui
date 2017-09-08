@@ -1,5 +1,7 @@
 Project Name: scons sfml imgui
 
+License: CCO
+
 Information: Simple compiler build test with scons script from python.
 
 Programs and Codes:
