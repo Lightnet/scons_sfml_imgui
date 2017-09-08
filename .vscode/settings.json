@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "SConstruct": "python",
+        "iostream": "cpp"
+    },
+
+    "development_mode":"debug",     //development build mode
+    "output_dir":"bin",             //out put bin builds
+    "output_program":"sfml_scene"   //default without the application execute without ext file
+
+}
