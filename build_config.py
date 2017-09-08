@@ -4,8 +4,6 @@ import os
 #--------
 # Config files
 #--------
-SDL2_INCLUDE_PATH = 'C:\\SDL2-2.0.5\\include'
-SDL2_LIB_PATH = 'C:\\SDL2-2.0.5\\lib\\x86'
 IMGUI_PATH = 'imgui'
 #--------
 # folder dir and output folder or file
@@ -17,6 +15,10 @@ projectpackage = 'src'						#holds the project folder
 builddir = './' + projectpackage  			#holds the build directory for this project
 #targetpath = buildroot + '/' + projectname	#holds the path to the executable in the build directory
 #-------
+#---- SFML ----
+SFML_LIBS = 'SFML-2.4.2\\lib'
+#SFML_LIBS = 'C:\\sfml-build\\lib\\Release'
+SFML_BIN = 'SFML-2.4.2\\bin\\'
 
 #thirdparty_libs = []
 #thirdparty_includes = []
@@ -47,7 +49,6 @@ lib_packages.append('sfml-graphics')
 #lib_packages.append('vorbisenc')
 #lib_packages.append('vorbisfile')
 
-
 dll_packages = []
 dll_packages.append('sfml-audio-2')
 dll_packages.append('sfml-graphics-2')
@@ -66,11 +67,6 @@ lib_packages += core_packages
 include_packages +=core_packages
 
 lib_files = []
-
-SFML_LIBS = 'SFML-2.4.2\\lib'
-SFML_BIN = 'SFML-2.4.2\\bin\\'
-#SFML_LIBS = 'C:\\sfml-build\\lib\\Release'
-
 #lib_files.append("SFML-2.4.2\\lib\\sfml-graphics-s.lib")
 lib_files.append(SFML_LIBS + "\\sfml-graphics.lib")
 lib_files.append(SFML_LIBS + "\\sfml-audio.lib")

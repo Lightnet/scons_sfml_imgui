@@ -4,3 +4,5 @@ bin/
 *.pyc
 imgui.ini
 resources/
+imgui/*.obj
+src/*.obj

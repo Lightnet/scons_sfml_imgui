@@ -18,3 +18,4 @@ Credits:
 
 Notes:
  * lib warrnings first time build will show error. After that there is no errors when compile again.
+ * Tends to get Dlls or Libs errors.

@@ -7,7 +7,7 @@ from build_support import *
 from build_config import *
 
 print("Scons Script Build!")
-projectmode = ARGUMENTS.get('mode', 'debug')   #holds current mode
+projectmode = ARGUMENTS.get('mode', 'release')   #holds current mode
 projecttool = 'window'
 
 #check if the user has been naughty: only 'debug' or 'release' allowed
@@ -60,15 +60,11 @@ if system=='Windows':
 	env.Library(buildroot + '\\imgui',Glob(IMGUI_PATH + '\\*.cpp')) #Imgui
 	#--SFML
 	#env.Library(buildroot + 'sfml' , lib_files,CCFLAGS='-MD -MF')
-	#env.Library(buildroot + 'sfml' , lib_files)
-
 	#env.Library(buildroot + 'sfml-graphics' , SFML_LIBS + '\\sfml-graphics.lib')
 	#env.Library(buildroot + 'sfml-system.' , SFML_LIBS + '\\sfml-system.lib')
 	#env.Library(buildroot + 'sfml-window' , SFML_LIBS + '\\sfml-window.lib')
-
-	#env.Library(buildroot + 'sfml' , lib_files)
-
-	env.Library(buildroot + 'sfml' , Glob(SFML_LIBS +"\\*.lib"))
+	env.Library(buildroot + 'sfml' , lib_files)
+	#env.Library(buildroot + 'sfml' , Glob(SFML_LIBS +"\\*.lib"))
 
 	#copy file or folder to bin dir
 	#http://scons.org/doc/1.2.0/HTML/scons-user/c2848.html
