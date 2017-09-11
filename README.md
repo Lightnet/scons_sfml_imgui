@@ -1,4 +1,4 @@
-Project Name: scons sfml imgui
+Project Name: sfml_rpgen
 
 License: CCO
 
@@ -6,14 +6,12 @@ Information: Simple compiler build test with scons script from python.
 
 Compile default set to release build. Window 10 32bit. VS2017
 
-To this project needed to install python to 2.7.x 32bit window with scons (http://scons.org/) installed with path varaible into the system. Scons is an tool builder like Visual Studio tool community but simpler and Visual Studio Code with using tasks clicks. Trying to keep it to bare minimal. If your on window. Before you build, check to have visual studio tool community install c/c++. The purpose for this project is to keep thing very simple and port to platform without much needed another need config and build for linux and mac os. Just test build. (test only on window 10)
-
-Configs:
+Configs:(Window 10 Config Current build)
  * build_config.py
  * SConstruct (Scons build script compiler config)
  * .vscode
- * vsbuild_debug (Note you need to edit the file to change to your location dir [default to c:/project/scons_sfml_imgui])
- * vsbuild_release (Note you need to edit the file to change to your location dir [default to c:/project/scons_sfml_imgui])
+ * vsbuild_debug
+ * vsbuild_release
 
 Programs and Codes:
  * Visual Studio Code 

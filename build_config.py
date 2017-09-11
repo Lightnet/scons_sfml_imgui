@@ -9,24 +9,21 @@ IMGUI_PATH = 'imgui'
 # folder dir and output folder or file
 #--------
 
-projectname = 'sfml_scene'				#holds the project name
-projectpackage = 'src'						#holds the project folder
-#buildroot = './bin/' + projectmode			#holds the root of the build directory tree
-builddir = './' + projectpackage  			#holds the build directory for this project
-#targetpath = buildroot + '/' + projectname	#holds the path to the executable in the build directory
+projectname = 'sfml_rpgen'				#holds the project name
+projectpackage = 'main'						#holds the project folder
+SRC_PATH = 'src'
+builddir = '.' + os.sep + SRC_PATH + os.sep + projectpackage  			#holds the build directory for this project
+
 #-------
 #---- SFML ----
 SFML_LIBS = 'SFML-2.4.2\\lib'
 #SFML_LIBS = 'C:\\sfml-build\\lib\\Release'
 SFML_BIN = 'SFML-2.4.2\\bin\\'
 
-#thirdparty_libs = []
-#thirdparty_includes = []
-
 #--include files
 include_packages = []
 include_packages.append('SFML-2.4.2\\include')
-include_packages.append('imgui')
+include_packages.append(SRC_PATH + os.sep + 'imgui')
 
 #--engine node packages
 core_packages = []

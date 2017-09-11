@@ -20,8 +20,8 @@ print('**** Compiling in ' + projectmode + ' mode...')
 #--------
 # application folder dir and output folder
 #--------
-buildroot = './bin/' + projectmode + '/'	#holds the root of the build directory tree
-targetpath = buildroot + '/' + projectname	#holds the path to the executable in the build directory
+buildroot = './bin/' + projectmode	#holds the root of the build directory tree
+targetpath = buildroot + os.sep + projectname	#holds the path to the executable in the build directory
 #-------
 
 if projecttool == 'window': #window tool default to vs2017
@@ -49,14 +49,15 @@ if system=='Windows':
 		#env.Append(CPPFLAGS=['_DEBUG'])
 		#env.Append(CPPFLAGS=['WINDOW'])
 		pass
-
+	if projectmode == 'release':
+		pass
 	#env.Append(CPPDEFINES = ['SFML_STATIC']) 
 	#env.Append(CPPFLAGS=['-DOPENGL_ENABLED'])
 	
 	env.Append(CPPPATH=include_packages) #include files
 	#build lib file
 	#--imgui
-	env.Library(buildroot + '\\imgui',Glob(IMGUI_PATH + '\\*.cpp')) #Imgui
+	env.Library(buildroot + os.sep +  'imgui',Glob(SRC_PATH + os.sep  + IMGUI_PATH + os.sep +  '*.cpp')) #Imgui
 	#--SFML
 	#env.Library(buildroot + 'sfml' , lib_files,CCFLAGS='-MD -MF')
 	#env.Library(buildroot + 'sfml-graphics' , SFML_LIBS + '\\sfml-graphics.lib')
@@ -65,20 +66,20 @@ if system=='Windows':
 	#env.Library(buildroot + 'sfml' , Glob(SFML_LIBS +"\\*.lib"))
 
 	if projectmode == 'release':
-		lib_files.append(SFML_LIBS + "\\sfml-graphics.lib")
-		lib_files.append(SFML_LIBS + "\\sfml-audio.lib")
-		lib_files.append(SFML_LIBS + "\\sfml-network.lib")
-		lib_files.append(SFML_LIBS + "\\sfml-system.lib")
-		lib_files.append(SFML_LIBS + "\\sfml-window.lib")
-		env.Library(buildroot + 'sfml' , lib_files)
+		lib_files.append(SFML_LIBS + os.sep + "sfml-graphics.lib")
+		lib_files.append(SFML_LIBS + os.sep + "sfml-audio.lib")
+		lib_files.append(SFML_LIBS + os.sep + "sfml-network.lib")
+		lib_files.append(SFML_LIBS + os.sep + "sfml-system.lib")
+		lib_files.append(SFML_LIBS + os.sep + "sfml-window.lib")
+		env.Library(buildroot + os.sep +'sfml' , lib_files)
 		#pass
 	if projectmode == 'debug':
-		lib_files.append(SFML_LIBS + "\\sfml-graphics-s-d.lib")
-		lib_files.append(SFML_LIBS + "\\sfml-audio-s-d.lib")
-		lib_files.append(SFML_LIBS + "\\sfml-network-s-d.lib")
-		lib_files.append(SFML_LIBS + "\\sfml-system-s-d.lib")
-		lib_files.append(SFML_LIBS + "\\sfml-window-s-d.lib")
-		env.Library(buildroot + 'sfml' , lib_files)
+		lib_files.append(SFML_LIBS + os.sep + "sfml-graphics-s-d.lib")
+		lib_files.append(SFML_LIBS + os.sep + "sfml-audio-s-d.lib")
+		lib_files.append(SFML_LIBS + os.sep + "sfml-network-s-d.lib")
+		lib_files.append(SFML_LIBS + os.sep + "sfml-system-s-d.lib")
+		lib_files.append(SFML_LIBS + os.sep + "sfml-window-s-d.lib")
+		env.Library(buildroot + os.sep + 'sfml' , lib_files)
 		#pass
 
 	#copy file or folder to bin dir
@@ -88,5 +89,5 @@ if system=='Windows':
 		env.Install(buildroot, SFML_BIN + basename + ".dll") #copy dll to output
 	#env.Install(buildroot,Glob("SFML-2.4.2\\bin\\*.dll") #copy dll to output
 	#exeute application 
-	env.Program(targetpath, Glob(builddir + '\\*.cpp'), LIBS=lib_packages, LIBPATH=['.',SFML_LIBS, buildroot])
+	env.Program(targetpath, Glob(builddir + os.sep + '*.cpp'), LIBS=lib_packages, LIBPATH=['.',SFML_LIBS, buildroot])
 print("**** Scons Script End!")

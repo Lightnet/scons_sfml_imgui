@@ -1,45 +1,24 @@
-////////////////////////////////////////////////////////////
-// Headers
-////////////////////////////////////////////////////////////
-//#include "stdafx.h"
-#include <SFML/Graphics.hpp>
-//#include <windows.h>
-//#include <cmath>
-#include <SFML/Window.hpp>
+#include "imgui.h"
+#include "imgui-SFML.h"
+
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Clock.hpp>
+#include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/CircleShape.hpp>
+
 #include <SFML/OpenGL.hpp>
-//#include "imgui-SFML.h"
+#include <SFML/Graphics.hpp>
 
-
-////////////////////////////////////////////////////////////
-/// Entry point of application
-///
-/// \return Application exit code
-///
-////////////////////////////////////////////////////////////
-//int main()
-int test()
+int main()
+//int main_sfml_imgui()
 {
-    // Request a 24-bits depth buffer when creating the window
-    sf::ContextSettings contextSettings;
-    contextSettings.depthBits = 24;
-
-    // Create the main window
-    sf::Window window(sf::VideoMode(640, 480), "SFML window with OpenGL", sf::Style::Default, contextSettings);
-    //ImGui::SFML::Init(window);
-
-    // Load some textures to display
-    //sf::Texture texture1, texture2;
-    //if (!texture1.loadFromFile("resources/image1.jpg") || !texture2.loadFromFile("resources/image2.jpg"))
-        //return EXIT_FAILURE;
-
-    //sf::Sprite sprite1(texture1);
-    //sf::Sprite sprite2(texture2);
-    //sprite1.setOrigin(sf::Vector2f(texture1.getSize()) / 2.f);
-    //sprite1.setPosition(sprite1.getOrigin());
+    sf::RenderWindow window(sf::VideoMode(640, 480), "ImGui + SFML = <3");
+    window.setFramerateLimit(60);
+    ImGui::SFML::Init(window);
 
     // Make it the active window for OpenGL calls
     window.setActive();
-
+    
     // Set the color and depth clear values
     glClearDepth(1.f);
     glClearColor(0.f, 0.f, 0.f, 1.f);
@@ -72,40 +51,40 @@ int test()
         -50,  50, -50,  0, 0, 1, 1,
         -50,  50,  50,  0, 0, 1, 1,
 
-         50, -50, -50,  0, 1, 0, 1,
-         50,  50, -50,  0, 1, 0, 1,
-         50, -50,  50,  0, 1, 0, 1,
-         50, -50,  50,  0, 1, 0, 1,
-         50,  50, -50,  0, 1, 0, 1,
-         50,  50,  50,  0, 1, 0, 1,
+            50, -50, -50,  0, 1, 0, 1,
+            50,  50, -50,  0, 1, 0, 1,
+            50, -50,  50,  0, 1, 0, 1,
+            50, -50,  50,  0, 1, 0, 1,
+            50,  50, -50,  0, 1, 0, 1,
+            50,  50,  50,  0, 1, 0, 1,
 
         -50, -50, -50,  1, 0, 0, 1,
-         50, -50, -50,  1, 0, 0, 1,
+            50, -50, -50,  1, 0, 0, 1,
         -50, -50,  50,  1, 0, 0, 1,
         -50, -50,  50,  1, 0, 0, 1,
-         50, -50, -50,  1, 0, 0, 1,
-         50, -50,  50,  1, 0, 0, 1,
+            50, -50, -50,  1, 0, 0, 1,
+            50, -50,  50,  1, 0, 0, 1,
 
         -50,  50, -50,  0, 1, 1, 1,
-         50,  50, -50,  0, 1, 1, 1,
+            50,  50, -50,  0, 1, 1, 1,
         -50,  50,  50,  0, 1, 1, 1,
         -50,  50,  50,  0, 1, 1, 1,
-         50,  50, -50,  0, 1, 1, 1,
-         50,  50,  50,  0, 1, 1, 1,
+            50,  50, -50,  0, 1, 1, 1,
+            50,  50,  50,  0, 1, 1, 1,
 
         -50, -50, -50,  1, 0, 1, 1,
-         50, -50, -50,  1, 0, 1, 1,
+            50, -50, -50,  1, 0, 1, 1,
         -50,  50, -50,  1, 0, 1, 1,
         -50,  50, -50,  1, 0, 1, 1,
-         50, -50, -50,  1, 0, 1, 1,
-         50,  50, -50,  1, 0, 1, 1,
+            50, -50, -50,  1, 0, 1, 1,
+            50,  50, -50,  1, 0, 1, 1,
 
         -50, -50,  50,  1, 1, 0, 1,
-         50, -50,  50,  1, 1, 0, 1,
+            50, -50,  50,  1, 1, 0, 1,
         -50,  50,  50,  1, 1, 0, 1,
         -50,  50,  50,  1, 1, 0, 1,
-         50, -50,  50,  1, 1, 0, 1,
-         50,  50,  50,  1, 1, 0, 1,
+            50, -50,  50,  1, 1, 0, 1,
+            50,  50,  50,  1, 1, 0, 1,
     };
 
     // Enable position and color vertex components
@@ -118,32 +97,56 @@ int test()
     glDisableClientState(GL_NORMAL_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
+    
+
+    //2d draw
+    //sf::CircleShape shape(100.f);
+    //shape.setFillColor(sf::Color::Green);
+
+    //https://github.com/Mischa-Alff/imgui-backends/blob/master/SFML/README.md
+    //https://github.com/ocornut/imgui/issues/1064
+
+    /*
+    ImGui::Begin();
+    ...
+    ImGui::End();
+
+    m_window->clear();
+    m_window->draw(...);
+    window->resetGLStates();
+    ImGui::Render();
+    m_window->display();
+    */
+
     // Create a clock for measuring the time elapsed
     sf::Clock clock;
+    sf::Clock deltaClock;
+    while (window.isOpen()) {
 
-    // Start the game loop
-    while (window.isOpen())
-    {
-        // Process events
         sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // Close window: exit
-            if (event.type == sf::Event::Closed)
-                window.close();
+        while (window.pollEvent(event)) {
+            ImGui::SFML::ProcessEvent(event);
 
-            // Escape key: exit
-            if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+            if (event.type == sf::Event::Closed) {
                 window.close();
-
-            // Resize event: adjust the viewport
-            if (event.type == sf::Event::Resized)
-                glViewport(0, 0, event.size.width, event.size.height);
+            }
         }
+
+        ImGui::SFML::Update(window, deltaClock.restart());
+
+        ImGui::ShowTestWindow();
+        
+        ImGui::Begin("Hello, world!");
+        ImGui::Button("Look at this pretty button");
+        ImGui::End();
+
+        window.clear();
+        //window.draw(shape);
+
 
         // Clear the color and depth buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+         
         // Apply some transformations to rotate the cube
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
@@ -154,10 +157,13 @@ int test()
 
         // Draw the cube
         glDrawArrays(GL_TRIANGLES, 0, 36);
-
-        // Finally, display the rendered frame on screen
+        ImGui::SFML::Render(window);
         window.display();
+
+        
     }
 
-    return EXIT_SUCCESS;
+    ImGui::SFML::Shutdown();
+    
+    return 0;
 }

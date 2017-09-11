@@ -1,11 +1,14 @@
 {
     "files.associations": {
         "SConstruct": "python",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "xutility": "cpp",
+        "xlocmes": "cpp",
+        "xiosbase": "cpp"
     },
 
     "development_mode":"release",   //development build mode
     "output_dir":"bin",             //out put bin builds
-    "output_program":"sfml_scene"   //default without the application execute without ext file
+    "output_program":"sfml_rpgen"   //default without the application execute without ext file
 
 }

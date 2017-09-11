@@ -304,7 +304,7 @@ void Update(const sf::Vector2i& mousePos, const sf::Vector2f& displaySize, sf::T
 
 void Render(sf::RenderTarget& target)
 {
-    target.resetGLStates();
+    //target.resetGLStates(); //todo
     ImGui::Render();
 }
 

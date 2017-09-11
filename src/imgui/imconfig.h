@@ -81,3 +81,10 @@ namespace ImGui
             static_cast<sf::Uint8>(z * 255.f),                          \
             static_cast<sf::Uint8>(w * 255.f));                         \
     }
+
+#define IMGUI_OVERRIDE_DRAWVERT_STRUCT_LAYOUT struct ImDrawVert\
+{\
+    ImVec2  pos;\
+    ImU32   col;\
+    ImVec2  uv;\
+};
