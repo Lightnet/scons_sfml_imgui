@@ -9,8 +9,8 @@
 #include <SFML/OpenGL.hpp>
 #include <SFML/Graphics.hpp>
 
-int main()
-//int main_sfml_imgui()
+//int main()
+int main_sfml_imgui_gl()
 {
     sf::RenderWindow window(sf::VideoMode(640, 480), "ImGui + SFML = <3");
     window.setFramerateLimit(60);
@@ -159,8 +159,6 @@ int main()
         glDrawArrays(GL_TRIANGLES, 0, 36);
         ImGui::SFML::Render(window);
         window.display();
-
-        
     }
 
     ImGui::SFML::Shutdown();

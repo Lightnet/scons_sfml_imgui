@@ -55,6 +55,7 @@ if system=='Windows':
 	#env.Append(CPPFLAGS=['-DOPENGL_ENABLED'])
 	
 	env.Append(CPPPATH=include_packages) #include files
+	env.AppendUnique(CXXFLAGS=["/MD","/EHsc"])
 	#build lib file
 	#--imgui
 	env.Library(buildroot + os.sep +  'imgui',Glob(SRC_PATH + os.sep  + IMGUI_PATH + os.sep +  '*.cpp')) #Imgui

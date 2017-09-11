@@ -9,7 +9,7 @@ IMGUI_PATH = 'imgui'
 # folder dir and output folder or file
 #--------
 
-projectname = 'sfml_rpgen'				#holds the project name
+projectname = 'sfml_scene'				#holds the project name
 projectpackage = 'main'						#holds the project folder
 SRC_PATH = 'src'
 builddir = '.' + os.sep + SRC_PATH + os.sep + projectpackage  			#holds the build directory for this project

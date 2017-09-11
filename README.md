@@ -1,4 +1,4 @@
-Project Name: sfml_rpgen
+Project Name: scons_sfml_imgui
 
 License: CCO
 
