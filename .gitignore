@@ -5,3 +5,4 @@ bin/
 imgui.ini
 src/**/*.obj
 resources/
+imgui/**/*.obj
