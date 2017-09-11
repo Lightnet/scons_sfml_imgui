@@ -9,16 +9,32 @@
 #include <SFML/OpenGL.hpp>
 #include <SFML/Graphics.hpp>
 
-//int main()
-int main_sfml_imgui_gl()
+int main()
+//int main_sfml_imgui_gl()
 {
-    sf::RenderWindow window(sf::VideoMode(640, 480), "ImGui + SFML = <3");
+    sf::RenderWindow window(sf::VideoMode(640, 480), "ImGui + SFML + GL");
     window.setFramerateLimit(60);
     ImGui::SFML::Init(window);
 
     // Make it the active window for OpenGL calls
     window.setActive();
-    
+
+
+    //OpenGL Set up/////////////////
+    // Set color and depth clear value
+    //glClearDepth(1.f);
+    //glClearColor(0.f, 0.f, 0.f, 0.f);
+
+    // Enable Z-buffer read and write
+    //glEnable(GL_DEPTH_TEST);
+    //glDepthMask(GL_TRUE);
+
+    // Setup a perspective projection
+    //glMatrixMode(GL_PROJECTION);
+    //glLoadIdentity();
+    //gluPerspective(90.f, 1.f, 1.f, 500.f);
+    ////////////////////////////////////
+
     // Set the color and depth clear values
     glClearDepth(1.f);
     glClearColor(0.f, 0.f, 0.f, 1.f);
@@ -96,12 +112,10 @@ int main_sfml_imgui_gl()
     // Disable normal and texture coordinates vertex components
     glDisableClientState(GL_NORMAL_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-
     
-
     //2d draw
-    //sf::CircleShape shape(100.f);
-    //shape.setFillColor(sf::Color::Green);
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
 
     //https://github.com/Mischa-Alff/imgui-backends/blob/master/SFML/README.md
     //https://github.com/ocornut/imgui/issues/1064
@@ -122,6 +136,7 @@ int main_sfml_imgui_gl()
     sf::Clock clock;
     sf::Clock deltaClock;
     while (window.isOpen()) {
+        window.clear();
 
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -129,6 +144,11 @@ int main_sfml_imgui_gl()
 
             if (event.type == sf::Event::Closed) {
                 window.close();
+            }
+            if (event.type == sf::Event::Resized)
+            {
+                // adjust the viewport when the window is resized
+                glViewport(0, 0, event.size.width, event.size.height);
             }
         }
 
@@ -140,13 +160,23 @@ int main_sfml_imgui_gl()
         ImGui::Button("Look at this pretty button");
         ImGui::End();
 
-        window.clear();
+        //window.clear();
         //window.draw(shape);
 
+        // clear the buffers
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        glBegin(GL_POINT);
+
+        glPointSize(10.f);
+        glColor4i(255,0,0,255);
+        glVertex2f(50.f,50.f);
+
+        glEnd();
 
         // Clear the color and depth buffers
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-         
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
         // Apply some transformations to rotate the cube
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
@@ -154,11 +184,17 @@ int main_sfml_imgui_gl()
         glRotatef(clock.getElapsedTime().asSeconds() * 50, 1.f, 0.f, 0.f);
         glRotatef(clock.getElapsedTime().asSeconds() * 30, 0.f, 1.f, 0.f);
         glRotatef(clock.getElapsedTime().asSeconds() * 90, 0.f, 0.f, 1.f);
-
         // Draw the cube
         glDrawArrays(GL_TRIANGLES, 0, 36);
+        // read this window opengl
+        //https://www.sfml-dev.org/tutorials/2.4/window-opengl.php
+        window.pushGLStates();
+        window.resetGLStates();
+        window.draw(shape);
         ImGui::SFML::Render(window);
+        window.popGLStates();
         window.display();
+        
     }
 
     ImGui::SFML::Shutdown();

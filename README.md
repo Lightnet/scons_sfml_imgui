@@ -30,6 +30,10 @@ Credits:
 
  Information: Help with the imgui setup build with SFML.
 
+  * https://www.sfml-dev.org/tutorials/2.4/window-opengl.php
+
+ Information: This deal with the 2D and 3D render together. For Simple cube and imgui render example hud type.
+
 Notes:
  * lib warrnings first time build will show error. After that there is no errors when compile again.
  * Tends to get Dlls or Libs errors.

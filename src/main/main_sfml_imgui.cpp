@@ -6,8 +6,8 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 
-int main()
-//int main_sfml_imgui()
+//int main()
+int main_sfml_imgui()
 {
     sf::RenderWindow window(sf::VideoMode(640, 480), "ImGui + SFML = <3");
     window.setFramerateLimit(60);
